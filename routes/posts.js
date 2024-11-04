@@ -9,7 +9,6 @@ let posts = [
 
 // Get all posts
 router.get("/", (req, res) => {
-  console.log(req);
   const limit = parseInt(req.query.limit);
 
   if (!isNaN(limit) && limit > 0) {
@@ -20,14 +19,14 @@ router.get("/", (req, res) => {
 });
 
 // Get a single post
-router.get("/:id", (req, res) => {
+router.get("/:id", (req, res, next) => {
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
 
   if (!post) {
-    res.status(404).json({ message: `Post with id of ${id} not found.` });
-  } else {
-    res.status(200).json(post);
+    const error = new Error(`Post with id of ${id} not found.`);
+    error.status = 404;
+    return next(error);
   }
 });
 
