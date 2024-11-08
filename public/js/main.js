@@ -1,5 +1,6 @@
 const output = document.querySelector("#output");
 const button = document.querySelector("#get-posts-btn");
+const form = document.querySelector("#add-post-form");
 
 // Get and show posts
 async function showPosts() {
@@ -18,9 +19,40 @@ async function showPosts() {
       output.appendChild(element);
     });
   } catch (error) {
-    console.log("Error fetching posts.");   
+    console.log("Error fetching posts.");
+  }
+}
+
+// Submit/add new post
+async function addPost(e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  const title = formData.get("title");
+
+  try {
+    const res = await fetch("http://localhost:5000/api/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to add post.");
+    }
+
+    const newPost = await res.json();
+
+    const element = document.createElement("div");
+    element.textContent = newPost.title;
+    output.appendChild(element);
+    showPosts(); 
+  } catch (error) {
+    console.log("Error adding post.");
   }
 }
 
 // Event handlers
 button.addEventListener("click", showPosts);
+form.addEventListener("submit", addPost);
