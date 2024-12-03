@@ -1,6 +1,6 @@
 const output = document.querySelector("#output");
 const button = document.querySelector("#get-posts-btn");
-const form = document.querySelector("#add-post-form");
+const form = document.querySelector("#add-post-form"); 
 
 // Update post
 async function updatePost(postId) {
