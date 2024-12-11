@@ -1,9 +1,8 @@
 import express from "express";
 import { fileURLToPath } from "url";
-import posts from "./routes/posts.js";
-import logger from "./middleware/logger.js";
-import errorHandler from "./middleware/error.js";
-import notFound from "./middleware/notFound.js";
+import mongoose from "mongoose";
+import cors from "cors";
+import tasks from "./routes/tasks.js";
 import path from "path";
 const port = 5000;
 
@@ -17,17 +16,20 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Logger middleware
-app.use(logger);
+// connect to db
+const CONNECTION_URL =
+  "mongodb+srv://drimmaculate147:johnwick9@cluster0.tgpoq.mongodb.net/";
+
+mongoose
+  .connect(CONNECTION_URL)
+  .then(() => console.log("Connected to database!"))
+  .catch((err) => console.log(err.message));
 
 // setup static folder
 app.use(express.static(path.join(__dirname, "client", "public")));
+app.use(cors());
 
 // ROUTES
-app.use("/api/posts", posts);
+app.use("/api/tasks", tasks);
 
-//Error middleware
-app.use(notFound);
-app.use(errorHandler);
-
-app.listen(5000, () => console.log(`Server is running on port ${port}.`)); 
+app.listen(5000, () => console.log(`Server is running on port ${port}.`));

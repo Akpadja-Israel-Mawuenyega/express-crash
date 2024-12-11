@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
-    "dev": "node --watch server"
+    "start": "nodemon server"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +13,9 @@
   "description": "",
   "dependencies": {
     "colors": "^1.4.0",
-    "express": "^4.21.1"
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.4",
+    "nodemon": "^3.1.7"
   }
 }
