@@ -53,10 +53,9 @@ export const createTask = async (req, res) => {
 // @route PUT api/tasks/:id
 export const updateTask = async (req, res) => {
   const id = req.params.id;
-  const { title, completed } = req.body;
 
   try {
-    const task = await taskMessage.findByIdAndUpdate(id, { title, completed });
+    const task = await taskMessage.findByIdAndUpdate(id, req.body);
 
     res.status(200).json(task);
   } catch (error) {

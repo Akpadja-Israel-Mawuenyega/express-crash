@@ -610,3 +610,8 @@ video {
 .underline {
   text-decoration-line: underline;
 }
+
+.completed {
+  text-decoration: line-through; /* Adds a line-through style */
+  color: gray; /* Optional: Change the color to indicate completion */
+}

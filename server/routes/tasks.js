@@ -24,4 +24,4 @@ router.put("/:id", updateTask);
 // Delete post
 router.delete("/:id", deleteTask);
 
-export default router; 
+export default router;

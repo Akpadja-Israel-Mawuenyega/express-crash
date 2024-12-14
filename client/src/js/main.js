@@ -56,6 +56,7 @@ async function showTasks() {
 
     const tasks = await res.json();
     output.innerHTML = "";
+    console.log(tasks);
 
     tasks.forEach((task) => {
       const element = document.createElement("div");
@@ -66,6 +67,12 @@ async function showTasks() {
       checkBox.checked = task.completed;
       element.textContent = task.title;
       const taskId = task._id;
+      console.log(taskId);
+
+      // check if task is completed
+      if (task.completed) {
+        element.classList.add("completed"); // Add the completed class
+      }
 
       // Create edit button
       editBtn.textContent = "Edit";
@@ -78,7 +85,10 @@ async function showTasks() {
       // Checkbox functionality
       checkBox.onchange = async (e) => {
         const currentStatus = e.target.checked;
-        await toggleTaskCompletion(taskId, currentStatus);
+        const newStatus = !currentStatus;
+
+        e.target.checked = newStatus;
+        await toggleTaskCompletion(taskId, newStatus);
       };
 
       // Append children
@@ -125,9 +135,9 @@ async function addTask(e) {
   }
 }
 
-async function toggleTaskCompletion(taskId, currentStatus) {
+async function toggleTaskCompletion(taskId, status) {
   // Toggle the completed status
-  const newStatus = !currentStatus;
+  const newStatus = !status;
 
   try {
     const res = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
@@ -137,8 +147,6 @@ async function toggleTaskCompletion(taskId, currentStatus) {
       },
       body: JSON.stringify({ completed: newStatus }),
     });
-
-    console.log(newStatus);
 
     if (!res.ok) {
       const errorMessage = await res.text(); // Get the error message from the response
