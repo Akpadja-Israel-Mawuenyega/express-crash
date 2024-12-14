@@ -1,6 +1,7 @@
 const output = document.querySelector("#output");
 const button = document.querySelector("#get-tasks-btn");
-const form = document.querySelector("#add-task-form");
+const inputBox = document.querySelector("#add-task-field");
+const form = document.querySelector("#form");
 
 // Update task
 async function updateTask(taskId) {
@@ -41,7 +42,7 @@ async function deleteTask(taskId) {
 
     showTasks(); // Refresh the list of tasks
   } catch (error) {
-    console.log("Error deleting task.");
+    console.log(error.message);
   }
 }
 
@@ -60,69 +61,93 @@ async function showTasks() {
       const element = document.createElement("div");
       const delBtn = document.createElement("button");
       const editBtn = document.createElement("button");
+      const checkBox = document.createElement("input");
+      checkBox.type = "checkbox";
+      checkBox.checked = task.completed;
       element.textContent = task.title;
+      const taskId = task._id;
 
       // Create edit button
       editBtn.textContent = "Edit";
-      editBtn.onclick = () => updateTask(task.id);
+      editBtn.onclick = () => updateTask(taskId);
 
       // Create delete button
       delBtn.textContent = "Delete";
-      delBtn.onclick = () => deleteTask(task.id);
+      delBtn.onclick = () => deleteTask(taskId);
+
+      // Checkbox functionality
+      checkBox.onchange = async (e) => {
+        const currentStatus = e.target.checked;
+        await toggleTaskCompletion(taskId, currentStatus);
+      };
 
       // Append children
       output.appendChild(element);
-      output.appendChild(editBtn);
-      output.appendChild(delBtn);
+      element.appendChild(checkBox);
+      element.appendChild(editBtn);
+      element.appendChild(delBtn);
     });
   } catch (error) {
-    console.log("Error fetching tasks.");
+    console.log(error.message);
   }
 }
 
 // Submit/add new task
 async function addTask(e) {
   e.preventDefault();
-  const formData = new FormData(this);
-  const title = formData.get("title");
+  const title = inputBox.value;
+  const completed = false;
 
   try {
-    const res = await fetch("http://localhost:5000/api/tasks", {
-      method: "post",
+    if (!title) {
+      alert("You must add a title!");
+      return;
+    } else {
+      const res = await fetch("http://localhost:5000/api/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, completed }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to add task.");
+      }
+
+      const newTask = await res.json();
+      showTasks();
+    }
+
+    inputBox.value = "";
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function toggleTaskCompletion(taskId, currentStatus) {
+  // Toggle the completed status
+  const newStatus = !currentStatus;
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title }),
+      body: JSON.stringify({ completed: newStatus }),
     });
 
+    console.log(newStatus);
+
     if (!res.ok) {
-      throw new Error("Failed to add task.");
+      const errorMessage = await res.text(); // Get the error message from the response
+      throw new Error(`Failed to update task: ${errorMessage}`);
     }
 
-    const newTask = await res.json();
-    console.log(newTask);
-
-    const element = document.createElement("div");
-    const delBtn = document.createElement("button");
-    const editBtn = document.createElement("button");
-    element.textContent = task.title;
-
-    // Create edit button
-    editBtn.textContent = "Edit";
-    editBtn.onclick = () => updateTask(task.id);
-
-    // Create delete button
-    delBtn.textContent = "Delete";
-    delBtn.onclick = () => deleteTask(task.id);
-
-    // Append children
-    output.appendChild(element);
-    output.appendChild(editBtn);
-    output.appendChild(delBtn);
-    output.appendChild(element);
-    showTasks();
+    showTasks(); // Refresh the list of tasks
   } catch (error) {
-    console.log("Error adding task.");
+    console.error("Error updating task completion:", error);
   }
 }
 

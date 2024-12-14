@@ -3,21 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../src/output.css" rel="stylesheet"/>
+    <link href="../src/css/output.css" rel="stylesheet"/>
     <title>Welcome</title>
   </head>
   <body>
-    <div class="place-items-center m-1 w-full">
+    <div class="place-items-center mt-1 w-full">
     <h1 class="text-3xl font-bold underline">TO DO LIST</h1>
-    <form id="add-post-form">
-      <label for="title">Title</label><br>
-      <input type="text"name="title" />
-      <button type="submit">Add Post</button>
+    <form class="mt-5" id="form">
+      <input class="m-2 rounded border p-2" type="text" name="title" placeholder="Title..." id="add-task-field" />
+      <button type="submit" class="m-2 border rounded p-1">Add Post</button>
     </form>
-    </form>
-    <button id="get-posts-btn">Get Posts</button>
+    <button id="get-tasks-btn" class="m-2 border rounded p-1">See Tasks</button>
     <div id="output"></div>
-    <script src="./js/main.js"></script>
     </div>
+    <script src="../src/js/main.js"></script>
   </body>
 </html>

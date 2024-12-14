@@ -558,6 +558,18 @@ video {
   margin: 0.25rem;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .w-full {
   width: 100%;
 }
@@ -568,6 +580,22 @@ video {
 
 .place-items-center {
   place-items: center;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .text-3xl {

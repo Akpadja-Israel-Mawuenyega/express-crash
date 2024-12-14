@@ -1,11 +1,22 @@
 import mongoose from "mongoose";
 
 const taskSchema = mongoose.Schema({
-  task: String,
-  completed: Boolean,
-  date: { type: Date, default: new Date() },
+  title: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+  date: { type: Date, default: () => new Date(), required: false },
 });
 
-const taskMessage = mongoose.model("taskMessage", taskSchema);
+console.log(taskSchema);
 
-export default taskMessage;
+export const taskMessage = mongoose.model(
+  "taskMessage",
+  taskSchema,
+  "taskmessages"
+);

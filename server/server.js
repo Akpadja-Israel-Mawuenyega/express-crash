@@ -13,8 +13,8 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Body parser middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: "100mb" }));
+app.use(express.urlencoded({ extended: true }));
 
 // connect to db
 const CONNECTION_URL =
@@ -32,4 +32,4 @@ app.use(cors());
 // ROUTES
 app.use("/api/tasks", tasks);
 
-app.listen(5000, () => console.log(`Server is running on port ${port}.`));
+app.listen(port, () => console.log(`Server is running on port ${port}.`));

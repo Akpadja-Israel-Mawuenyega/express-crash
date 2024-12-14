@@ -1,4 +1,4 @@
-import taskMessage from "../models/taskMessage.js";
+import { taskMessage } from "../models/taskMessage.js";
 
 // @desc Get all tasks
 // @route GET api/tasks
@@ -16,40 +16,49 @@ export const getTasks = async (req, res) => {
 // @route GET api/tasks/:id
 export const getTask = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
+    if (!id) {
+      res.status(400).json({ message: "Invalid id" });
+      return;
+    }
     const task = await taskMessage.findById(id);
+
+    if (!task) {
+      res.status(404).json({ message: `Task with id of ${id} not found!` });
+      return;
+    }
 
     res.status(200).json(task);
   } catch (error) {
-    res.status(404).json({ message: `Task with id of ${id} not found!` });
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 // @desc CREATE a task
 // @route POST api/task
 export const createTask = async (req, res) => {
-  const task = req.body;
-  const newTask = new taskMessage(task);
+  console.log(req.body);
 
   try {
-    await newTask.save();
+    const newTask = await taskMessage.create(req.body);
 
     res.status(201).json(newTask);
   } catch (error) {
-    res.status(400).json({ message: "Error while creating task." });
+    res.status(400).json({ message: error.message });
   }
 };
 
 // @desc UPDATE a task
 // @route PUT api/tasks/:id
 export const updateTask = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
+  const { title, completed } = req.body;
 
   try {
-    const id = parseInt(req.params.id);
-    const task = await taskMessage.findByIdAndUpdate(id, req.body.title);
+    const task = await taskMessage.findByIdAndUpdate(id, { title, completed });
 
-    res.status(204).json(task);
+    res.status(200).json(task);
   } catch (error) {
     res.status(404).json({ message: `Task with id of ${id} not found` });
   }
@@ -60,7 +69,7 @@ export const updateTask = async (req, res) => {
 export const deleteTask = async (req, res) => {
   try {
     const id = req.params.id;
-    const task = await findByIdAndDelete(id);
+    const task = await taskMessage.findByIdAndDelete(id);
 
     if (!task) {
       return res
