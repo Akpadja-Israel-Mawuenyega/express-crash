@@ -1,0 +1,110 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: linear-gradient(to right, #8360c3, #2ebf91);
+}
+
+.header {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-box {
+  width: 300px;
+  height: 60px;
+}
+
+.task-content {
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.task-content,
+.task-box {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  width: 100%; /* Ensure full width */
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px; /* Increased padding for uniformity */
+  margin-bottom: 10px;
+  margin-top: 15px;
+  width: 100%; /* Full width of the container */
+}
+
+.task-actions {
+  display: flex;
+  margin-left: auto;
+  gap: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px; /* Increased padding for uniformity */
+  margin-bottom: 10px;
+  margin-top: 15px;
+  width: 100%; /* Ensure full width */
+}
+
+.del-btn,
+.edit-btn {
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  min-width: 70px; /* Set a minimum width for buttons */
+  height: 30px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: gray; /* Button background color */
+  color: white; /* Button text color */
+}
+
+.del-btn:hover,
+.edit-btn:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+#add-task-field {
+  margin-bottom: 15px;
+  border-radius: 5px;
+  width: 300px;
+  padding: 10px;
+}
+
+#get-tasks-btn {
+  margin-bottom: 10px;
+  height: 30px;
+}
+
+.checkbox {
+  margin-left: 10px;
+}
+
+.edit-btn {
+  background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+.del-btn {
+  background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+}

@@ -63,6 +63,13 @@ async function showTasks() {
       const delBtn = document.createElement("button");
       const editBtn = document.createElement("button");
       const checkBox = document.createElement("input");
+      const taskContent = document.createElement("div");
+      const taskActions = document.createElement("div");
+      const taskBox = document.createElement("div");
+      taskBox.classList.add("task-box");
+      taskActions.classList.add("task-actions");
+      taskContent.classList.add("task-content");
+      checkBox.classList.add("checkbox");
       checkBox.type = "checkbox";
       checkBox.checked = task.completed;
       element.textContent = task.title;
@@ -72,14 +79,18 @@ async function showTasks() {
       // check if task is completed
       if (task.completed) {
         element.classList.add("completed"); // Add the completed class
+      } else {
+        element.classList.add("task-item");
       }
 
       // Create edit button
       editBtn.textContent = "Edit";
+      editBtn.classList.add("edit-btn");
       editBtn.onclick = () => updateTask(taskId);
 
       // Create delete button
       delBtn.textContent = "Delete";
+      delBtn.classList.add("del-btn");
       delBtn.onclick = () => deleteTask(taskId);
 
       // Checkbox functionality
@@ -92,10 +103,14 @@ async function showTasks() {
       };
 
       // Append children
-      output.appendChild(element);
-      element.appendChild(checkBox);
-      element.appendChild(editBtn);
-      element.appendChild(delBtn);
+      output.appendChild(taskBox);
+      taskBox.appendChild(taskContent);
+      taskContent.appendChild(element);
+      taskContent.appendChild(taskActions);
+      taskActions.appendChild(editBtn);
+      taskActions.appendChild(delBtn);
+      taskBox.appendChild(checkBox);
+
     });
   } catch (error) {
     console.log(error.message);

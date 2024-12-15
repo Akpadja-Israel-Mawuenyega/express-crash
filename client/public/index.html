@@ -3,18 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../src/css/output.css" rel="stylesheet"/>
+    <link href="../src/css/styles.css" rel="stylesheet" />
     <title>Welcome</title>
   </head>
   <body>
-    <div class="place-items-center mt-1 w-full">
-    <h1 class="text-3xl font-bold underline">TO DO LIST</h1>
-    <form class="mt-5" id="form">
-      <input class="m-2 rounded border p-2" type="text" name="title" placeholder="Title..." id="add-task-field" />
-      <button type="submit" class="m-2 border rounded p-1">Add Post</button>
-    </form>
-    <button id="get-tasks-btn" class="m-2 border rounded p-1">See Tasks</button>
-    <div id="output"></div>
+    <div class="container">
+      <h1 class="header">TO DO LIST</h1>
+      <form class="mt-5" id="form">
+        <input
+          type="text"
+          name="title"
+          placeholder="Title..."
+          id="add-task-field"
+        />
+        <button type="submit" class="submit-btn">Add Task</button>
+      </form>
+      <button id="get-tasks-btn">See Tasks</button>
+        <div id="output"></div>
     </div>
     <script src="../src/js/main.js"></script>
   </body>
