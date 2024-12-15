@@ -66,12 +66,16 @@ async function showTasks() {
       const taskContent = document.createElement("div");
       const taskActions = document.createElement("div");
       const taskBox = document.createElement("div");
+      const dateElement = document.createElement("p");
+      dateElement.className = "date";
       taskBox.classList.add("task-box");
       taskActions.classList.add("task-actions");
       taskContent.classList.add("task-content");
       checkBox.classList.add("checkbox");
       checkBox.type = "checkbox";
       checkBox.checked = task.completed;
+      const date = new Date(task.date).toLocaleDateString();
+      dateElement.textContent = date;
       element.textContent = task.title;
       const taskId = task._id;
       console.log(taskId);
@@ -106,11 +110,11 @@ async function showTasks() {
       output.appendChild(taskBox);
       taskBox.appendChild(taskContent);
       taskContent.appendChild(element);
+      taskContent.appendChild(dateElement);
       taskContent.appendChild(taskActions);
       taskActions.appendChild(editBtn);
       taskActions.appendChild(delBtn);
       taskBox.appendChild(checkBox);
-
     });
   } catch (error) {
     console.log(error.message);
