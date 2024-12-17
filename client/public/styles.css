@@ -13,7 +13,7 @@ body {
 }
 
 .background {
-  background-image: url("../src/assets/background-img.jpg");
+  background-image: url("background-img.jpg");
   position: fixed;
   background-size: cover;
   background-position: center;
