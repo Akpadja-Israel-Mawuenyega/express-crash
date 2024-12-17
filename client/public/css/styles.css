@@ -12,7 +12,7 @@ body {
   overflow-x: hidden;
 }
 
-.loading-gif {
+#loading-gif {
   width: 249px;
   height: 249px;
 }
