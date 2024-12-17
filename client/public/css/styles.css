@@ -12,6 +12,11 @@ body {
   overflow-x: hidden;
 }
 
+.loading-gif {
+  width: 249px;
+  height: 249px;
+}
+
 .background {
   background-image: url("../assets/background-img.jpg");
   position: fixed;
