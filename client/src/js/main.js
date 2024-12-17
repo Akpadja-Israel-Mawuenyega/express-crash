@@ -9,13 +9,16 @@ async function updateTask(taskId) {
   if (!newTitle) return; // Exit if the user cancels
 
   try {
-    const res = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title: newTitle }),
-    });
+    const res = await fetch(
+      `https://express-crash-82yx.onrender.com/api/tasks/${taskId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title: newTitle }),
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to update task.");
@@ -32,9 +35,12 @@ async function deleteTask(taskId) {
   if (!confirm("Are you sure you want to delete this task?")) return; // Confirmation
 
   try {
-    const res = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `https://express-crash-82yx.onrender.com/api/tasks/${taskId}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to delete task.");
@@ -49,7 +55,9 @@ async function deleteTask(taskId) {
 // Get and show tasks
 async function showTasks() {
   try {
-    const res = await fetch("http://localhost:5000/api/tasks");
+    const res = await fetch(
+      "https://express-crash-82yx.onrender.com/api/tasks"
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch tasks");
     }
@@ -135,13 +143,16 @@ async function addTask(e) {
       alert("You must add a title!");
       return;
     } else {
-      const res = await fetch("http://localhost:5000/api/tasks", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title, completed }),
-      });
+      const res = await fetch(
+        "https://express-crash-82yx.onrender.com/api/tasks",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title, completed }),
+        }
+      );
 
       if (!res.ok) {
         throw new Error("Failed to add task.");
@@ -162,13 +173,16 @@ async function toggleTaskCompletion(taskId, status) {
   const newStatus = !status;
 
   try {
-    const res = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ completed: newStatus }),
-    });
+    const res = await fetch(
+      `https://express-crash-82yx.onrender.com/api/tasks/${taskId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ completed: newStatus }),
+      }
+    );
 
     if (!res.ok) {
       const errorMessage = await res.text(); // Get the error message from the response
