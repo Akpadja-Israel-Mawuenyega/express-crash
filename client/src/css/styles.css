@@ -1,9 +1,78 @@
+:root {
+  --color-dark: #000;
+  --color-dark-gray: #555;
+  --color-blue: #1e3a8a;
+  --box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
 body {
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: linear-gradient(to right, #8360c3, #2ebf91, #703bed, #f14cb2);
+  font-size: small;
+  overflow-x: hidden;
+}
+
+.background {
+  background-image: url("../assets/background-img.jpg");
+  position: fixed;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  filter: blur(5px);
+}
+
+nav {
+  background-color: white;
+  display: flex;
+  grid-area: header;
+  box-shadow: var(--box-shadow);
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-dark-gray);
+  text-align: center;
+  font-size: large;
+  padding: 1.2rem 0;
+  width: 20%;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background-color: var(--color-dark);
+  color: white;
+}
+
+nav a:focus {
+  background-color: var(--color-blue);
+}
+
+nav .active {
+  background-color: var(--color-blue);
+  color: white;
 }
 
 .header {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.about-footer {
+  text-align: center;
+  padding: 20px;
+  background-color: gray;
+  width: 100vw;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.contact-footer {
+  padding-top: 100px;
   text-align: center;
 }
 
@@ -25,6 +94,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: #a39999;
 }
 
 .task-content,
@@ -69,23 +139,19 @@ body {
   border: none;
   text-align: center;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
   align-items: center;
-  min-width: 70px; /* Set a minimum width for buttons */
-  height: 30px;
-  border-radius: 5px;
-  padding: 5px 10px;
-  background-color: gray; /* Button background color */
-  color: white; /* Button text color */
+  background: none;
 }
 
 .del-btn:hover,
 .edit-btn:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  transform: scale(1.1);
 }
 
-#add-task-field {
+#add-task-field,
+#name,
+#email,
+#message {
   margin-bottom: 15px;
   border-radius: 5px;
   width: 300px;
@@ -93,7 +159,8 @@ body {
 }
 
 #get-tasks-btn,
-.submit-btn {
+.submit-btn,
+#send {
   margin-bottom: 10px;
   height: 30px;
   border-radius: 5px;
@@ -109,8 +176,111 @@ body {
 
 .del-btn {
   background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+  margin-right: 5px;
 }
 
 .date {
   margin-right: 10px;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+  nav a {
+    width: 25%; /* Adjust width for larger screens */
+  }
+
+  .task-box {
+    width: 50vw; /* Make task box wider on medium screens */
+  }
+
+  .task-content {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  nav a {
+    width: 33.33%; /* Adjust width for tablets */
+  }
+
+  #add-task-field,
+  #name,
+  #email,
+  #message {
+    width: 80%; /* Make input fields wider on tablets */
+  }
+
+  .task-box {
+    width: 90%; /* Make task box wider on tablets */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav a {
+    width: 100%; /* Full width for nav items on small screens */
+    padding: 1rem 0; /* Adjust padding */
+  }
+
+  .header {
+    margin-top: 100px; /* Reduce margin for smaller screens */
+  }
+
+  .task-box {
+    width: 100%; /* Full width for task box on small screens */
+  }
+
+  #add-task-field,
+  #name,
+  #email,
+  #message {
+    width: 90%; /* Make input fields wider on small screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: smaller; /* Adjust font size for mobile */
+    overflow-x: hidden;
+  }
+
+  nav a {
+    font-size: medium; /* Adjust font size for nav items */
+  }
+
+  .about-footer,
+  .contact-footer {
+    padding: 10px; /* Reduce padding for footers */
+  }
+
+  .edit-btn,
+  .del-btn {
+    background-image: none;
+  }
+
+  .edit-btn::after {
+    content: "🖋️";
+  }
+
+  .del-btn::after {
+    content: "🗑️";
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .edit-btn,
+  .del-btn {
+    padding: 5px;
+    height: 30px;
+    margin-top: 10px;
+    min-width: 70px;
+    border-radius: 5px;
+  }
+
+  .edit-btn::after {
+    content: "Edit";
+  }
+
+  .del-btn::after {
+    content: "Delete";
+  }
 }

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../src/css/styles.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <a class="" href="../index.html">🏠</a>
+      <a class="" href="./about.html">About</a>
+      <a class="" href="./demo.html">Demo</a>
+      <a class="active" href="./docs.html">Docs</a>
+      <a class="" href="./contact.html">Contact</a>
+    </nav>
+    <div class="background"></div>
+    <header>
+      <h1>Task Manager Web App Documentation</h1>
+    </header>
+    <main style="margin: 5px;">
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          The Task Manager Web App is a powerful tool designed to help users
+          manage their tasks efficiently. It allows individuals and teams to
+          create, organize, and track tasks, set deadlines, and collaborate
+          seamlessly. The application is built using modern web technologies and
+          follows best practices for performance and usability.
+        </p>
+      </section>
+
+      <section id="features">
+        <h2>Features</h2>
+        <ul>
+          <li>
+            <strong>User Authentication:</strong> Secure login and registration
+            for users.
+          </li>
+          <li>
+            <strong>Task Management:</strong> Create, edit, delete, and
+            prioritize tasks.
+          </li>
+          <li>
+            <strong>Due Dates and Reminders:</strong> Set deadlines and receive
+            notifications.
+          </li>
+          <li>
+            <strong>Collaboration:</strong> Share tasks with team members and
+            assign responsibilities.
+          </li>
+          <li>
+            <strong>Search and Filter:</strong> Easily find tasks using search
+            and filter options.
+          </li>
+          <li>
+            <strong>Responsive Design:</strong> Access the app on any device,
+            including mobile and desktop.
+          </li>
+        </ul>
+      </section>
+
+      <section id="installation">
+        <h2>Installation</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+          <li>Node.js (version 14 or higher)</li>
+          <li>npm (Node Package Manager)</li>
+          <li>MongoDB (or any other database of your choice)</li>
+        </ul>
+        <h3>Steps</h3>
+        <ol>
+          <li>
+            <strong>Clone the Repository:</strong>
+            <pre><code>git clone https://github.com/yourusername/task-manager.git
+cd task-manager</code></pre>
+          </li>
+          <li>
+            <strong>Install Dependencies:</strong>
+            <pre><code>npm install</code></pre>
+          </li>
+          <li>
+            <strong>Set Up Environment Variables:</strong>
+            <p>
+              Create a <code>.env</code> file in the root directory and add the
+              following variables:
+            </p>
+            <pre><code>PORT=3000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret</code></pre>
+          </li>
+          <li>
+            <strong>Run the Application:</strong>
+            <pre><code>npm start</code></pre>
+          </li>
+          <li>
+            <strong>Access the App:</strong>
+            <p>
+              Open your browser and go to <code>http://localhost:3000</code>.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="usage">
+        <h2>Usage</h2>
+        <p>Once the application is running, you can:</p>
+        <ol>
+          <li>
+            <strong>Register a New Account:</strong> Click on the "Sign Up"
+            button and fill in the required information.
+          </li>
+          <li>
+            <strong>Log In:</strong> Use your credentials to log in to the
+            application.
+          </li>
+          <li>
+            <strong>Create a Task:</strong> Click on the "Add Task" button, fill
+            in the task details, and save.
+          </li>
+          <li>
+            <strong>Manage Tasks:</strong> Edit, delete, or mark tasks as
+            complete from your task list.
+          </li>
+        </ol>
+      </section>
+      <section id="authentication">
+        <h2>Authentication</h2>
+        <p>
+          All API requests require authentication via a JSON Web Token (JWT). To
+          obtain a token, users must log in with their credentials.
+        </p>
+        <h3>Login Endpoint</h3>
+        <p><strong>POST /api/auth/login</strong></p>
+        <p>Request Body:</p>
+        <pre><code>{
+    "email": "user@example.com",
+    "password": "yourpassword"
+}</code></pre>
+        <p>Response:</p>
+        <pre><code>{
+    "token": "your_jwt_token"
+}</code></pre>
+      </section>
+    </main>
+  </body>
+</html>

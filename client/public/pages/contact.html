@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../src/css/styles.css" rel="stylesheet" />
+    <script>
+      const handleSubmit = () => {
+        const form = document.getElementById("contact-form");
+        window.alert("Message sent!");
+      };
+    </script>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <a class="" href="../index.html">🏠</a>
+      <a class="" href="./about.html">About</a>
+      <a class="" href="./demo.html">Demo</a>
+      <a class="" href="./docs.html">Docs</a>
+      <a class="active" href="./contact.html">Contact</a>
+    </nav>
+    <div class="background"></div>
+    <header>
+      <h1>Contact Us</h1>
+    </header>
+    <main style="margin: 5px">
+      <section>
+        <h2>Get in Touch</h2>
+        <p>
+          If you have any questions, feedback, or need assistance, feel free to
+          reach out to us using the form below or through our contact
+          information.
+        </p>
+      </section>
+
+      <section>
+        <h2>Contact Form</h2>
+        <form id="#contact-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+          <br />
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <br />
+          <div style="display: flex">
+            <label style="margin-top: 40px; margin-right: 10px" for="message"
+              >Message:</label
+            >
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <br />
+          <button type="submit" id="send" onclick="handleSubmit()">
+            Send Message
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Contact Information</h2>
+        <p>
+          If you prefer to reach us directly, you can use the following contact
+          details:
+        </p>
+        <ul>
+          <li>
+            <strong>Email:</strong>
+            <a
+              style="text-decoration: none"
+              href="https://richmondnkansah1@gmail.com"
+              >richmondnkansah1@gmail.com</a
+            >
+          </li>
+          <li>
+            <strong>Phone:</strong
+            ><a style="text-decoration: none" href="tel:+2330503115080"
+              >+2330503115080</a
+            >
+          </li>
+          <li>
+            <strong>Address:</strong>PO 135 AM Pokuase, N6, Amasaman.
+            Accra,Ghana.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="contact-footer">
+      <p>&copy; 2024 Task Manager Web App. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -58,6 +58,10 @@ async function showTasks() {
     output.innerHTML = "";
     console.log(tasks);
 
+    if (tasks.length === 0) {
+      alert("You have no tasks added. Start adding now. 👇");
+    }
+
     tasks.forEach((task) => {
       const element = document.createElement("div");
       const delBtn = document.createElement("button");
@@ -78,7 +82,6 @@ async function showTasks() {
       dateElement.textContent = date;
       element.textContent = task.title;
       const taskId = task._id;
-      console.log(taskId);
 
       // check if task is completed
       if (task.completed) {
@@ -88,12 +91,12 @@ async function showTasks() {
       }
 
       // Create edit button
-      editBtn.textContent = "Edit";
+      editBtn.textContent = "";
       editBtn.classList.add("edit-btn");
       editBtn.onclick = () => updateTask(taskId);
 
       // Create delete button
-      delBtn.textContent = "Delete";
+      delBtn.textContent = "";
       delBtn.classList.add("del-btn");
       delBtn.onclick = () => deleteTask(taskId);
 
