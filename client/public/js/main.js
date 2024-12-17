@@ -2,6 +2,7 @@ const output = document.querySelector("#output");
 const button = document.querySelector("#get-tasks-btn");
 const inputBox = document.querySelector("#add-task-field");
 const form = document.querySelector("#form");
+const loading = document.querySelector("#loading");
 
 // Update task
 async function updateTask(taskId) {
@@ -55,6 +56,9 @@ async function deleteTask(taskId) {
 // Get and show tasks
 async function showTasks() {
   try {
+    loading.style.display = "block";
+    output.innerHTML = "";
+
     const res = await fetch(
       "https://express-crash-82yx.onrender.com/api/tasks"
     );
@@ -63,7 +67,9 @@ async function showTasks() {
     }
 
     const tasks = await res.json();
-    output.innerHTML = "";
+
+    loading.style.display = "none";
+
     console.log(tasks);
 
     if (tasks.length === 0) {
@@ -129,6 +135,7 @@ async function showTasks() {
     });
   } catch (error) {
     console.log(error.message);
+    loading.style.display = "none";
   }
 }
 
