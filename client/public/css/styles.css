@@ -13,6 +13,7 @@ body {
 }
 
 #loading-gif {
+  border-radius: 5px;
   width: 249px;
   height: 249px;
 }
