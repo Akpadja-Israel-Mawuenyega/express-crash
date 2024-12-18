@@ -8,7 +8,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: small;
+  font-size: medium;
   overflow-x: hidden;
 }
 
@@ -190,6 +190,23 @@ nav .active {
   margin-top: 20px;
 }
 
+.demo-header {
+  margin-top: 65px;
+}
+
+.demo-text {
+  margin-top: 0;
+  margin-left: 10px;
+}
+
+video {
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-bottom: 10vh;
+  width: 60vw;
+  border-radius: 5px;
+}
+
 @media screen and (max-width: 1200px) {
   nav a {
     width: 25%; /* Adjust width for larger screens */
@@ -245,8 +262,15 @@ nav .active {
 
 @media screen and (max-width: 480px) {
   body {
-    font-size: smaller; /* Adjust font size for mobile */
+    font-size: small; /* Adjust font size for mobile */
     overflow-x: hidden;
+  }
+
+  video {
+    width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 2vh;
   }
 
   nav a {
