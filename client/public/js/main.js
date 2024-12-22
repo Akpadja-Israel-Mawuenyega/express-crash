@@ -1,6 +1,7 @@
 const output = document.querySelector("#output");
 const button = document.querySelector("#get-tasks-btn");
 const inputBox = document.querySelector("#add-task-field");
+const reminderBox = document.querySelector("#add-reminder-field");
 const form = document.querySelector("#form");
 const loading = document.querySelector("#loading");
 
@@ -143,12 +144,15 @@ async function showTasks() {
 async function addTask(e) {
   e.preventDefault();
   const title = inputBox.value;
+  const reminder = reminderBox.value;
   const completed = false;
 
   try {
     if (!title) {
       alert("You must add a title!");
       return;
+    } else if (!reminder) {
+      alert("You must add a reminder!");
     } else {
       const res = await fetch(
         "https://express-crash-82yx.onrender.com/api/tasks",
@@ -157,9 +161,11 @@ async function addTask(e) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ title, completed }),
+          body: JSON.stringify({ title, completed, reminder }),
         }
       );
+
+      console.log(JSON.stringify({ title, completed, reminder }));
 
       if (!res.ok) {
         throw new Error("Failed to add task.");
@@ -170,6 +176,7 @@ async function addTask(e) {
     }
 
     inputBox.value = "";
+    reminderBox.value = "";
   } catch (error) {
     console.log(error);
   }

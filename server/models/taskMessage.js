@@ -11,6 +11,10 @@ const taskSchema = mongoose.Schema({
     default: false,
   },
   date: { type: Date, default: () => new Date(), required: false },
+  reminder: {
+    type: Date,
+    required: false,
+  },
 });
 
 console.log(taskSchema);
