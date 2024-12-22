@@ -26,7 +26,7 @@ mongoose
   .catch((err) => console.log(err.message));
 
 // setup static folder
-app.use(express.static(path.join(__dirname, "client", "public")));
+app.use(express.static(path.join(__dirname, "client", "public"))); 
 app.use(cors());
 
 // ROUTES

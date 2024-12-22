@@ -1,3 +1,9 @@
+// checking if permission granted for notifications
+if (Notification.permission === "granted") {
+  Notification.requestPermission();
+}
+
+// constants
 const output = document.querySelector("#output");
 const button = document.querySelector("#get-tasks-btn");
 const inputBox = document.querySelector("#add-task-field");
@@ -145,6 +151,8 @@ async function addTask(e) {
   e.preventDefault();
   const title = inputBox.value;
   const reminder = reminderBox.value;
+  const reminderDate = new Date(reminder);
+  const currentDate = new Date();
   const completed = false;
 
   try {
@@ -153,6 +161,9 @@ async function addTask(e) {
       return;
     } else if (!reminder) {
       alert("You must add a reminder!");
+    } else if (reminderDate <= currentDate) {
+      alert("Reminders must be in the future.");
+      return;
     } else {
       const res = await fetch(
         "https://express-crash-82yx.onrender.com/api/tasks",
@@ -172,6 +183,17 @@ async function addTask(e) {
       }
 
       const newTask = await res.json();
+
+      if (reminder) {
+        if (reminderDate > currentDate) {
+          const timeUntilReminder = reminderDate - currentDate;
+
+          // set a timeout to show notification
+          setTimeout(() => {
+            showNotification(newTask.title);
+          }, timeUntilReminder);
+        }
+      }
       showTasks();
     }
 
@@ -206,6 +228,17 @@ async function toggleTaskCompletion(taskId, status) {
     showTasks(); // Refresh the list of tasks
   } catch (error) {
     console.error("Error updating task completion:", error);
+  }
+}
+
+// show notifications
+function showNotification(taskTitle) {
+  // Create a notification
+  if (Notification.permission === "granted") {
+    new Notification("Reminder", {
+      body: `It's time for "${taskTitle}."`,
+      icon: "../assets/logo.jpg",
+    });
   }
 }
 
