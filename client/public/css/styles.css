@@ -119,6 +119,7 @@ nav .active {
   margin-bottom: 10px;
   margin-top: 15px;
   width: 100%; /* Full width of the container */
+  text-overflow: ellipsis;
 }
 
 .task-actions {
