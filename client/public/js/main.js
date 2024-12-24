@@ -1,6 +1,7 @@
 // constants
 const output = document.querySelector("#output");
 const button = document.querySelector("#get-tasks-btn");
+const deleteAllButton = document.querySelector("#delete-tasks-btn");
 const inputBox = document.querySelector("#add-task-field");
 const reminderBox = document.querySelector("#add-reminder-field");
 const form = document.querySelector("#form");
@@ -35,8 +36,6 @@ async function updateTask(taskId) {
 
 // Delete task
 async function deleteTask(taskId) {
-  if (!confirm("Are you sure you want to delete this task?")) return; // Confirmation
-
   try {
     const res = await fetch(
       `https://express-crash-82yx.onrender.com/api/tasks/${taskId}`,
@@ -50,6 +49,43 @@ async function deleteTask(taskId) {
     }
 
     showTasks(); // Refresh the list of tasks
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function deleteAllTasks() {
+  if (!confirm("Are you sure you want to delete all your tasks?")) return;
+  output.innerHTML = "";
+  try {
+    const res = await fetch(
+      `https://express-crash-82yx.onrender.com/api/tasks`
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch tasks.");
+    }
+
+    const tasks = await res.json();
+
+    if (tasks.length === 0) {
+      alert("There are no tasks to delete.");
+      return;
+    }
+
+    for (const task of tasks) {
+      const deleteRes = await fetch(
+        `https://express-crash-82yx.onrender.com/api/tasks/${task._id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!deleteRes.ok) {
+        console.error(`Failed to delete task with id of ${task._id}`);
+      }
+    }
+    alert("All tasks have been successfully deleted.");
   } catch (error) {
     console.log(error.message);
   }
@@ -84,6 +120,7 @@ async function showTasks() {
       const taskContent = document.createElement("div");
       const taskActions = document.createElement("div");
       const taskBox = document.createElement("div");
+      taskBox.draggable = true;
       const dateElement = document.createElement("p");
       dateElement.className = "date";
       taskBox.classList.add("task-box");
@@ -112,7 +149,10 @@ async function showTasks() {
       // Create delete button
       delBtn.textContent = "";
       delBtn.classList.add("del-btn");
-      delBtn.onclick = () => deleteTask(taskId);
+      delBtn.onclick = () => {
+        if (!confirm("Are you sure you want to delete this task?")) return;
+        deleteTask(taskId);
+      };
 
       // Checkbox functionality
       checkBox.onchange = async (e) => {
@@ -213,4 +253,5 @@ async function toggleTaskCompletion(taskId, status) {
 
 // Event handlers
 button.addEventListener("click", showTasks);
+deleteAllButton.addEventListener("click", deleteAllTasks);
 form.addEventListener("submit", addTask);

@@ -12,6 +12,12 @@ body {
   overflow-x: hidden;
 }
 
+.button-div {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
 #loading-gif {
   border-radius: 5px;
   width: 249px;
@@ -166,6 +172,7 @@ nav .active {
 }
 
 #get-tasks-btn,
+#delete-tasks-btn,
 .submit-btn,
 #send {
   margin-bottom: 10px;

@@ -5,7 +5,8 @@ import {
   createTask,
   updateTask,
   deleteTask,
-} from "../controllers/postController.js"; 
+  deleteAllTasks,
+} from "../controllers/postController.js";
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.get("/", getTasks);
 router.get("/:id", getTask);
 
 // Create a post
-router.post("/", createTask); 
+router.post("/", createTask);
 
 // Update a post
 router.put("/:id", updateTask);

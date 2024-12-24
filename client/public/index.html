@@ -26,17 +26,22 @@
           id="add-task-field"
         />
         <button type="submit" class="submit-btn">Add Task</button>
-        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
-          <label><strong style="padding: 20px;">Add a reminder 👇: </strong></label>
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px">
+          <label id="reminder-label"
+            ><strong style="padding: 20px">Add a reminder 👇: </strong></label
+          >
           <input
-          style="margin-top: 5px; border-radius: 4px;"
+            style="margin-top: 5px; border-radius: 4px"
             type="datetime-local"
             name="reminder"
             id="add-reminder-field"
           />
         </div>
       </form>
-      <button id="get-tasks-btn">See Tasks</button>
+      <div class="button-div">
+        <button id="get-tasks-btn">See Tasks</button>
+        <button id="delete-tasks-btn">Delete All 🚮</button>
+      </div>
       <div id="output"></div>
       <div id="loading" style="display: none">
         <img id="loading-gif" src="./assets/loading.gif" alt="" />

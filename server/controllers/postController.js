@@ -63,7 +63,7 @@ export const updateTask = async (req, res) => {
   }
 };
 
-// @desc DELETE a task
+// @desc DELETE a specific task
 // @route DELETE api/tasks/:id
 export const deleteTask = async (req, res) => {
   try {
