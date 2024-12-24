@@ -278,6 +278,10 @@ video {
     font-size: medium; /* Adjust font size for nav items */
   }
 
+  .task-item {
+    text-overflow: ellipsis;
+  }
+
   .about-footer,
   .contact-footer {
     padding: 10px; /* Reduce padding for footers */
