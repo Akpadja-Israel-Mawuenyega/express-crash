@@ -217,6 +217,7 @@ async function addTask(e) {
       return;
     } else if (!reminder) {
       alert("You must add a reminder!");
+      return;
     } else if (reminderDate <= currentDate) {
       alert("Reminders must be in the future.");
       return;
