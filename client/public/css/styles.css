@@ -279,6 +279,7 @@ video {
   }
 
   .task-item {
+    width: 33.33%;
     text-overflow: ellipsis;
   }
 
