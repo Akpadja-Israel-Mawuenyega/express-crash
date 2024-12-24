@@ -253,6 +253,12 @@ video {
     width: 100%; /* Full width for task box on small screens */
   }
 
+  .task-item {
+    width: 33.33%;
+    text-overflow: ellipsis;
+  }
+
+
   #add-task-field,
   #name,
   #email,
@@ -276,11 +282,6 @@ video {
 
   nav a {
     font-size: medium; /* Adjust font size for nav items */
-  }
-
-  .task-item {
-    width: 33.33%;
-    text-overflow: ellipsis;
   }
 
   .about-footer,
