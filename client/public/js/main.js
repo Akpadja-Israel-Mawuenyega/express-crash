@@ -1,8 +1,3 @@
-// checking if permission granted for notifications
-if (Notification.permission === "granted") {
-  Notification.requestPermission();
-}
-
 // constants
 const output = document.querySelector("#output");
 const button = document.querySelector("#get-tasks-btn");
@@ -76,8 +71,6 @@ async function showTasks() {
     const tasks = await res.json();
 
     loading.style.display = "none";
-
-    console.log(tasks);
 
     if (tasks.length === 0) {
       alert("You have no tasks added. Start adding now. 👇");
@@ -176,24 +169,11 @@ async function addTask(e) {
         }
       );
 
-      console.log(JSON.stringify({ title, completed, reminder }));
-
       if (!res.ok) {
         throw new Error("Failed to add task.");
       }
 
       const newTask = await res.json();
-
-      if (reminder) {
-        if (reminderDate > currentDate) {
-          const timeUntilReminder = reminderDate - currentDate;
-
-          // set a timeout to show notification
-          setTimeout(() => {
-            showNotification(newTask.title);
-          }, timeUntilReminder);
-        }
-      }
       showTasks();
     }
 
@@ -228,17 +208,6 @@ async function toggleTaskCompletion(taskId, status) {
     showTasks(); // Refresh the list of tasks
   } catch (error) {
     console.error("Error updating task completion:", error);
-  }
-}
-
-// show notifications
-function showNotification(taskTitle) {
-  // Create a notification
-  if (Notification.permission === "granted") {
-    new Notification("Reminder", {
-      body: `It's time for "${taskTitle}."`,
-      icon: "../assets/logo.jpg",
-    });
   }
 }
 
