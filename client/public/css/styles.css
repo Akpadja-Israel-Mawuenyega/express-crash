@@ -112,13 +112,13 @@ nav .active {
 }
 
 .task-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: inline-block;
   padding: 10px; /* Increased padding for uniformity */
-  margin-bottom: 10px;
-  margin-top: 15px;
-  width: 100%; /* Full width of the container */
+  padding-bottom: 10px;
+  padding-top: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100px; /* Full width of the container */
   text-overflow: ellipsis;
 }
 
@@ -187,7 +187,8 @@ nav .active {
 }
 
 .date {
-  margin-right: 10px;
+  margin-right: auto;
+  margin-left: auto;
   margin-top: 20px;
 }
 
@@ -257,7 +258,6 @@ video {
     width: 33.33%;
     text-overflow: ellipsis;
   }
-
 
   #add-task-field,
   #name,
