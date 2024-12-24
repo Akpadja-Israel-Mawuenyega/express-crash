@@ -96,6 +96,7 @@ nav .active {
 }
 
 .task-box {
+  position: relative;
   width: 300px;
   height: 60px;
 }
@@ -126,6 +127,7 @@ nav .active {
   white-space: nowrap;
   width: 100px; /* Full width of the container */
   text-overflow: ellipsis;
+  font-size: small;
 }
 
 .task-actions {
@@ -178,6 +180,31 @@ nav .active {
   margin-bottom: 10px;
   height: 30px;
   border-radius: 5px;
+}
+
+.tooltip {
+  position: absolute;
+  color: rgb(29, 25, 11);
+  bottom: 100%;
+  left: 50%;
+  border-radius: 4px;
+  margin-left: -50%;
+  padding: 10px;
+  font-size: small;
+  font-weight: bold;
+  background-image: linear-gradient(to right, gray, white);
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #999999 transparent transparent transparent;
+  background-image: linear-gradient(to right, gray, white);
 }
 
 .checkbox {
@@ -294,6 +321,21 @@ video {
   .about-footer,
   .contact-footer {
     padding: 10px; /* Reduce padding for footers */
+  }
+
+  .tooltip {
+    font-size: smaller;
+  }
+
+  .task-item {
+    display: inline-block;
+    padding: 10px; /* Increased padding for uniformity */
+    padding-bottom: 10px;
+    padding-top: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100px; /* Full width of the container */
+    text-overflow: ellipsis;
   }
 
   .edit-btn,

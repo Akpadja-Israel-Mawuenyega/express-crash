@@ -110,6 +110,8 @@ async function showTasks() {
 
     if (tasks.length === 0) {
       alert("You have no tasks added. Start adding now. 👇");
+      button.style.display = "none";
+      deleteAllButton.style.display = "none";
     }
 
     tasks.forEach((task) => {
@@ -154,6 +156,26 @@ async function showTasks() {
         deleteTask(taskId);
       };
 
+      // tooltip
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
+      const reminder = new Date(task.reminder);
+      const reminderDate = reminder.toLocaleDateString();
+      tooltip.textContent =
+        task.title + " " + "(Reminder:" + " " + reminderDate + ")";
+      tooltip.style.display = "none";
+      taskBox.appendChild(tooltip);
+
+      // Mouseover to see full task name (tooltip) since there is truncated text
+      taskBox.onmouseover = () => {
+        tooltip.style.display = "block";
+      };
+
+      // Hide tooltip on mouseout
+      taskBox.onmouseout = () => {
+        tooltip.style.display = "none";
+      };
+
       // Checkbox functionality
       checkBox.onchange = async (e) => {
         const currentStatus = e.target.checked;
@@ -173,6 +195,7 @@ async function showTasks() {
       taskActions.appendChild(delBtn);
       taskBox.appendChild(checkBox);
     });
+    button.innerHTML = "Refresh Tasks 🔃";
   } catch (error) {
     console.log(error.message);
     loading.style.display = "none";
@@ -219,6 +242,8 @@ async function addTask(e) {
 
     inputBox.value = "";
     reminderBox.value = "";
+    button.style.display = "block";
+    deleteAllButton.style.display = "block";
   } catch (error) {
     console.log(error);
   }
