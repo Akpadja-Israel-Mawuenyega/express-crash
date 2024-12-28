@@ -47,30 +47,9 @@
         <img id="loading-gif" src="./assets/loading.gif" alt="" />
       </div>
       <div id="nothing-here" style="display: none">
-        <img
-          id="nothing-here-gif"
-          src="./assets/theres-nothing-here-andre-raines.gif"
-          alt=""
-        />
+        <img id="nothing-here-gif" src="./assets/theres-nothing-here-andre-raines.gif" alt="" />
       </div>
     </div>
-    <script src="./js/main.js">
-            // register service workers
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("/client/public/js/sw.js")
-            .then((registration) => {
-              console.log(
-                "Service Worker registered with scope:",
-                registration.scope
-              );
-            })
-            .catch((error) => {
-              console.error("Service Worker registration failed:", error);
-            });
-        });
-      }
-    </script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
