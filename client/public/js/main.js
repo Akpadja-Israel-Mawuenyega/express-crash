@@ -290,18 +290,40 @@ deleteAllButton.addEventListener("click", deleteAllTasks);
 form.addEventListener("submit", addTask);
 
 // register service workers
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/js/sw.js")
-      .then((registration) => {
-        console.log(
-          "Service Worker registered with scope:",
-          registration.scope
-        );
-      })
-      .catch((error) => {
-        console.error("Service Worker registration failed:", error);
-      });
-  });
-}
+const registerSW = async () => {
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/js/sw.js")
+        .then((registration) => {
+          console.log(
+            "Service Worker registered with scope:",
+            registration.scope
+          );
+        })
+        .catch((error) => {
+          console.error("Service Worker registration failed:", error);
+        });
+    });
+  }
+};
+
+// request permission to use notifications
+const requestNotificationPermission = async () => {
+  if ("Notification" in window) {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        console.log("Notification permission granted.");
+      } else {
+        console.log("Notification permission denied.");
+      }
+    });
+  }
+};
+
+// access service worker registration object
+const main = async () => {
+  const reg = await registerSW();
+  console.log(reg);
+  reg.showNotification("Hello!");
+};

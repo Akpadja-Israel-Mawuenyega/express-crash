@@ -18,7 +18,8 @@ body {
   gap: 30px;
 }
 
-#loading-gif, #nothing-here-gif {
+#loading-gif,
+#nothing-here-gif {
   border-radius: 5px;
   width: 249px;
   height: 249px;
@@ -179,6 +180,7 @@ nav .active {
 
 #get-tasks-btn,
 #delete-tasks-btn,
+#request-notifications-btn,
 .submit-btn,
 #send {
   margin-bottom: 10px;
