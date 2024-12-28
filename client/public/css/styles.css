@@ -18,10 +18,14 @@ body {
   gap: 30px;
 }
 
-#loading-gif {
+#loading-gif, #nothing-here-gif {
   border-radius: 5px;
   width: 249px;
   height: 249px;
+}
+
+#nothing-here-gif {
+  margin-top: 20px;
 }
 
 .background {

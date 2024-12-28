@@ -6,6 +6,7 @@ const inputBox = document.querySelector("#add-task-field");
 const reminderBox = document.querySelector("#add-reminder-field");
 const form = document.querySelector("#form");
 const loading = document.querySelector("#loading");
+const nothingHere = document.querySelector("#nothing-here");
 
 // Update task
 async function updateTask(taskId) {
@@ -112,6 +113,9 @@ async function showTasks() {
       alert("You have no tasks added. Start adding now. 👇");
       button.style.display = "none";
       deleteAllButton.style.display = "none";
+      output.style.font = "italic 20px arial,helvetica,serif";
+      output.innerHTML = "You have no tasks to show.";
+      nothingHere.style.display = "block";
     }
 
     tasks.forEach((task) => {
@@ -184,6 +188,9 @@ async function showTasks() {
         e.target.checked = newStatus;
         await toggleTaskCompletion(taskId, newStatus);
       };
+
+      // set output font
+      output.style.font = "medium arial,helvetica,serif";
 
       // Append children
       output.appendChild(taskBox);
@@ -281,3 +288,15 @@ async function toggleTaskCompletion(taskId, status) {
 button.addEventListener("click", showTasks);
 deleteAllButton.addEventListener("click", deleteAllTasks);
 form.addEventListener("submit", addTask);
+
+// register service workers
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("sw.js")
+    .then((registration) =>
+      console.log("Service worker registered:", registration)
+    )
+    .catch((registrationError) =>
+      console.error("Service worker registration failed:", registrationError)
+    );
+}
