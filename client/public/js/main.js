@@ -292,8 +292,8 @@ form.addEventListener("submit", addTask);
 // register service workers
 const registerSW = async () => {
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker
+    window.addEventListener("load", async () => {
+      await navigator.serviceWorker
         .register("/js/sw.js")
         .then((registration) => {
           console.log(
@@ -311,7 +311,7 @@ const registerSW = async () => {
 // request permission to use notifications
 const requestNotificationPermission = async () => {
   if ("Notification" in window) {
-    Notification.requestPermission().then((permission) => {
+    await Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
         console.log("Notification permission granted.");
       } else {
