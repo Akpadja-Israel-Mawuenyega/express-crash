@@ -327,3 +327,5 @@ const main = async () => {
   console.log(reg);
   reg.showNotification("Hello!");
 };
+
+main();
