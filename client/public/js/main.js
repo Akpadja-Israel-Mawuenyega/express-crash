@@ -292,7 +292,7 @@ form.addEventListener("submit", addTask);
 // register service workers
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("sw.js")
+    .register("../../../client/public/js/sw.js")
     .then((registration) =>
       console.log("Service worker registered:", registration)
     )
