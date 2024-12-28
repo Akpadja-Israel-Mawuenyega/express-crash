@@ -293,7 +293,7 @@ form.addEventListener("submit", addTask);
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/client/public/js/sw.js")
+      .register("/js/sw.js")
       .then((registration) => {
         console.log(
           "Service Worker registered with scope:",
