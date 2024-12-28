@@ -292,32 +292,30 @@ form.addEventListener("submit", addTask);
 // register service workers
 const registerSW = async () => {
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", async () => {
-      await navigator.serviceWorker
-        .register("/js/sw.js")
-        .then((registration) => {
-          console.log(
-            "Service Worker registered with scope:",
-            registration.scope
-          );
-        })
-        .catch((error) => {
-          console.error("Service Worker registration failed:", error);
-        });
-    });
+    try {
+      const registration = await navigator.serviceWorker.register("/js/sw.js");
+      console.log("Service Worker registered with scope:", registration.scope);
+      return registration;
+    } catch {
+      (error) => {
+        console.error("Service Worker registration failed:", error);
+      };
+    }
+  } else {
+    console.log("Service workers are not supported.");
   }
 };
 
 // request permission to use notifications
 const requestNotificationPermission = async () => {
   if ("Notification" in window) {
-    await Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        console.log("Notification permission granted.");
-      } else {
-        console.log("Notification permission denied.");
-      }
-    });
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") {
+      console.log("Permission to use notifications not granted.");
+    }
+  }
+  else {
+    console.log("Notifications are not supported.");
   }
 };
 
