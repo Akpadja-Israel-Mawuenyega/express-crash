@@ -203,7 +203,7 @@ async function showTasks() {
       taskActions.appendChild(delBtn);
       taskBox.appendChild(checkBox);
     });
-    button.innerHTML = "Refresh Tasks 🔃";
+    button.innerHTML = '<i class="fa-solid fa-rotate-right"></i>';
   } catch (error) {
     console.log(error.message);
     loading.style.display = "none";
