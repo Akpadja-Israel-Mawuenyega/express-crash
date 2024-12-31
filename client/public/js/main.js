@@ -85,6 +85,8 @@ async function deleteAllTasks() {
     alert("All tasks have been successfully deleted.");
     nothingHere.style.display = "block";
     bell.style.display = "none";
+    button.style.display = "none";
+    deleteAllButton.style.display = "none";
   } catch (error) {
     console.log(error.message);
   }
@@ -252,6 +254,7 @@ async function addTask(e) {
     button.style.display = "block";
     deleteAllButton.style.display = "block";
     nothingHere.style.display = "none";
+    bell.style.display = "block";
   } catch (error) {
     console.log(error);
   }
