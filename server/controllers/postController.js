@@ -1,4 +1,5 @@
 import { taskMessage, subscriptionMessage } from "../models/taskMessage.js";
+import webpush from "web-push";
 
 // @desc Get all tasks
 // @route GET api/tasks
@@ -83,7 +84,7 @@ export const deleteTask = async (req, res) => {
 };
 
 // @desc CREATE a push subscription
-// @route POST /api/save-subscription
+// @route POST /api/save-subscriptions
 export const createSubscription = async (req, res) => {
   try {
     const newSubscription = await subscriptionMessage.create({ ...req.body });
@@ -91,4 +92,13 @@ export const createSubscription = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+};
+
+// @desc send push notifications
+// @ ROUTE GET /api/send-notifications
+export const sendPushNotification = async (req, res) => {
+  try {
+    webpush.sendNotification(subscriptionMessage[0], "Hello!");
+    res.status(200).json({ message: "Message sent to push service." });
+  } catch (error) {}
 };

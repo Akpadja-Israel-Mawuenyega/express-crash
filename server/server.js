@@ -1,4 +1,5 @@
 import express from "express";
+import webpush from "web-push";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -11,6 +12,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+const apiKeys = {
+  publicKey:
+    "BDaWA7suSh7L68U49m1dtO0deUksIcWLgsYcO5lAltrIObiNOaD3IFpbhXKedmylKXS6MHW8jFSLuOtkerpMcf4",
+  privateKey: "4aWKgdC2BewEueSE_NiHHEX1pCziNE-0dssp38u9HmA",
+};
+
+webpush.setVapidDetails(
+  "mailto:drimmaculate147@gmail.com",
+  apiKeys.publicKey,
+  apiKeys.privateKey
+);
 
 // Body parser middleware
 app.use(express.json({ limit: "100mb" }));
@@ -26,7 +39,7 @@ mongoose
   .catch((err) => console.log(err.message));
 
 // setup static folder
-app.use(express.static(path.join(__dirname, "client", "public"))); 
+app.use(express.static(path.join(__dirname, "client", "public")));
 app.use(cors());
 
 // ROUTES
