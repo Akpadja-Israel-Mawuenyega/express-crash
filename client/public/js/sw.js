@@ -37,6 +37,12 @@ self.addEventListener("activate", async () => {
   console.log(res);
 });
 
+self.addEventListener("push", async (e) => {
+  self.registration.showNotification("Wohoo!", {
+    body: e.data.text(),
+  });
+});
+
 // Public Key:
 // BDaWA7suSh7L68U49m1dtO0deUksIcWLgsYcO5lAltrIObiNOaD3IFpbhXKedmylKXS6MHW8jFSLuOtkerpMcf4
 
