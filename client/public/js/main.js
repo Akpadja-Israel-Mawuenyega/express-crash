@@ -289,40 +289,35 @@ button.addEventListener("click", showTasks);
 deleteAllButton.addEventListener("click", deleteAllTasks);
 form.addEventListener("submit", addTask);
 
-// register service workers
+const checkPermission = () => {
+  if (!("serviceWorker" in navigator)) {
+    throw new Error("No support for service worker!");
+  }
+
+  if (!("Notification" in window)) {
+    throw new Error("No support for notification API");
+  }
+
+  if (!("PushManager" in window)) {
+    throw new Error("No support for Push API");
+  }
+};
+
 const registerSW = async () => {
-  if ("serviceWorker" in navigator) {
-    try {
-      const registration = await navigator.serviceWorker.register("/js/sw.js");
-      console.log("Service Worker registered with scope:", registration.scope);
-      return registration;
-    } catch {
-      (error) => {
-        console.error("Service Worker registration failed:", error);
-      };
-    }
-  } else {
-    console.log("Service workers are not supported.");
-  }
+  const registration = await navigator.serviceWorker.register("sw.js");
+  return registration;
 };
 
-// request permission to use notifications
 const requestNotificationPermission = async () => {
-  if ("Notification" in window) {
-    const permission = await Notification.requestPermission();
-    if (!permission === "granted") {
-      console.log("Permission to use notifications not granted.");
-    }
-  } else {
-    console.log("Notifications are not supported.");
+  const permission = await Notification.requestPermission();
+
+  if (permission !== "granted") {
+    throw new Error("Notification permission not granted");
   }
 };
 
-// access service worker registration object
 const main = async () => {
-  const reg = await registerSW();
-  console.log(reg);
-  reg.showNotification("Hello!");
+  checkPermission();
+  await requestNotificationPermission();
+  await registerSW();
 };
-
-main();

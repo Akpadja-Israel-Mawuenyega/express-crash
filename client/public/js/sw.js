@@ -1,1 +1,3 @@
-console.log("This message is from the service worker!");
+self.addEventListener("activate", async (e) => {
+  const subscription = await self.registration.pushManager.subscribe({});
+});
