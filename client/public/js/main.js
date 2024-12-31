@@ -289,6 +289,7 @@ button.addEventListener("click", showTasks);
 deleteAllButton.addEventListener("click", deleteAllTasks);
 form.addEventListener("submit", addTask);
 
+// check permissions for Notification and  PushManager APIs and service worker
 const checkPermission = () => {
   if (!("serviceWorker" in navigator)) {
     throw new Error("No support for service worker!");
@@ -303,11 +304,13 @@ const checkPermission = () => {
   }
 };
 
+// register the service worker
 const registerSW = async () => {
   const registration = await navigator.serviceWorker.register("/js/sw.js");
   return registration;
 };
 
+// request Notification permission
 const requestNotificationPermission = async () => {
   const permission = await Notification.requestPermission();
 
@@ -316,6 +319,7 @@ const requestNotificationPermission = async () => {
   }
 };
 
+// main service worker, pushManager and notification function
 const main = async () => {
   checkPermission();
   await requestNotificationPermission();
