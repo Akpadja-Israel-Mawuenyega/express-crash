@@ -1,4 +1,4 @@
-import { taskMessage } from "../models/taskMessage.js";
+import { taskMessage, subscriptionMessage } from "../models/taskMessage.js";
 
 // @desc Get all tasks
 // @route GET api/tasks
@@ -77,6 +77,17 @@ export const deleteTask = async (req, res) => {
     }
 
     res.status(200).json({ message: "Task succesfully deleted." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc CREATE a push subscription
+// @route POST /api/save-subscription
+export const createSubscription = async (req, res) => {
+  try {
+    const newSubscription = await subscriptionMessage.create({ ...req.body });
+    res.status(200).json(newSubscription);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

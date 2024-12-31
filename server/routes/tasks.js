@@ -5,18 +5,22 @@ import {
   createTask,
   updateTask,
   deleteTask,
+  createSubscription,
 } from "../controllers/postController.js";
 
 const router = express.Router();
 
 // Get all posts
-router.get("/", getTasks);
+router.get("/tasks", getTasks);
 
 // Get a single post
-router.get("/:id", getTask);
+router.get("/tasks/:id", getTask);
 
 // Create a post
-router.post("/", createTask);
+router.post("/tasks", createTask);
+
+// Create a push suscription
+router.post("/save-subscription", createSubscription);
 
 // Update a post
 router.put("/:id", updateTask);

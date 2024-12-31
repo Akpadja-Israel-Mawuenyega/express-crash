@@ -17,10 +17,23 @@ const taskSchema = mongoose.Schema({
   },
 });
 
-console.log(taskSchema);
+const subscriptionSchema = mongoose.Schema({
+  endpoint: String,
+  expirationTime: Number,
+  keys: {
+    p256dh: String,
+    auth: String,
+  },
+});
 
 export const taskMessage = mongoose.model(
   "taskMessage",
   taskSchema,
   "taskmessages"
+);
+
+export const subscriptionMessage = mongoose.model(
+  "subscriptions",
+  subscriptionSchema,
+  "subscriptions"
 );
