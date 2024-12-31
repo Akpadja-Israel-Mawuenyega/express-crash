@@ -23,7 +23,7 @@ const saveSubscription = async (subscription) => {
       body: JSON.stringify(subscription),
     }
   );
-  return res.json();
+  console.log(res);
 };
 
 self.addEventListener("activate", async () => {
