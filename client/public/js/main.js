@@ -295,16 +295,16 @@ const checkPermission = () => {
   }
 
   if (!("Notification" in window)) {
-    throw new Error("No support for notification API");
+    throw new Error("No support for notification API.");
   }
 
   if (!("PushManager" in window)) {
-    throw new Error("No support for Push API");
+    throw new Error("No support for Push API.");
   }
 };
 
 const registerSW = async () => {
-  const registration = await navigator.serviceWorker.register("sw.js");
+  const registration = await navigator.serviceWorker.register("/client/public/js/sw.js");
   return registration;
 };
 
@@ -312,7 +312,7 @@ const requestNotificationPermission = async () => {
   const permission = await Notification.requestPermission();
 
   if (permission !== "granted") {
-    throw new Error("Notification permission not granted");
+    throw new Error("Notification permission not granted.");
   }
 };
 
