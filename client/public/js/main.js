@@ -304,7 +304,7 @@ const checkPermission = () => {
 };
 
 const registerSW = async () => {
-  const registration = await navigator.serviceWorker.register("/client/public/js/sw.js");
+  const registration = await navigator.serviceWorker.register("/js/sw.js");
   return registration;
 };
 
