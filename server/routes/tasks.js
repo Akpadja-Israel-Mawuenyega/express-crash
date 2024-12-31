@@ -5,7 +5,6 @@ import {
   createTask,
   updateTask,
   deleteTask,
-  deleteAllTasks,
 } from "../controllers/postController.js";
 
 const router = express.Router();
