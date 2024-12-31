@@ -7,6 +7,7 @@ const reminderBox = document.querySelector("#add-reminder-field");
 const form = document.querySelector("#form");
 const loading = document.querySelector("#loading");
 const nothingHere = document.querySelector("#nothing-here");
+const bell = document.querySelector("#request-notifications-btn");
 
 // Update task
 async function updateTask(taskId) {
@@ -252,6 +253,7 @@ async function addTask(e) {
     reminderBox.value = "";
     button.style.display = "block";
     deleteAllButton.style.display = "block";
+    nothingHere.style.display = "none";
   } catch (error) {
     console.log(error);
   }
@@ -310,11 +312,10 @@ const registerSW = async () => {
 const requestNotificationPermission = async () => {
   if ("Notification" in window) {
     const permission = await Notification.requestPermission();
-    if (permission !== "granted") {
+    if (!permission === "granted") {
       console.log("Permission to use notifications not granted.");
     }
-  }
-  else {
+  } else {
     console.log("Notifications are not supported.");
   }
 };
