@@ -23,9 +23,9 @@ router.post("/tasks", createTask);
 router.post("/save-subscription", createSubscription);
 
 // Update a post
-router.put("/:id", updateTask);
+router.put("/tasks/:id", updateTask);
 
 // Delete post
-router.delete("/:id", deleteTask);
+router.delete("/tasks/:id", deleteTask);
 
 export default router;
