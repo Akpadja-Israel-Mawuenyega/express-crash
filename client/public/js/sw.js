@@ -21,6 +21,7 @@ self.addEventListener("activate", async (e) => {
       "BDaWA7suSh7L68U49m1dtO0deUksIcWLgsYcO5lAltrIObiNOaD3IFpbhXKedmylKXS6MHW8jFSLuOtkerpMcf4"
     ),
   });
+  console.log(subscription);
 });
 
 // Public Key:
