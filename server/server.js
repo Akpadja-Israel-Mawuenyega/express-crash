@@ -30,6 +30,6 @@ app.use(express.static(path.join(__dirname, "client", "public")));
 app.use(cors());
 
 // ROUTES
-app.use("/api", tasks);
+app.use("/api/", tasks);
 
 app.listen(port, () => console.log(`Server is running on port ${port}.`));
