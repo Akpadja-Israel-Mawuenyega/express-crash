@@ -101,6 +101,7 @@ export const sendPushNotification = async (req, res) => {
   try {
     webpush.sendNotification(subscriptionMessage[0], "Hello!");
     res.status(200).json({ message: "Message sent to push service." });
+    res.status(200).json(subscriptionMessage);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
