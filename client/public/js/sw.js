@@ -15,11 +15,15 @@ const urlBase64ToUint8Array = (base64String) => {
 };
 
 const saveSubscription = async (subscription) => {
-  await fetch("https://express-crash-82yx.onrender.com/api/save-subscription", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(subscription),
-  });
+  const res = await fetch(
+    "https://express-crash-82yx.onrender.com/api/save-subscription",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(subscription),
+    }
+  );
+  res.json();
 };
 
 self.addEventListener("activate", async () => {
