@@ -89,6 +89,7 @@ export const createSubscription = async (req, res) => {
   try {
     const newSubscription = await subscriptionMessage.create(req.body);
     res.status(200).json(newSubscription);
+    console.log(newSubscription);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
