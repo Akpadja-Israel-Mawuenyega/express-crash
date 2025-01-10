@@ -47,9 +47,11 @@ const scheduleReminder = async (task) => {
       body: `${task.title}is due!`,
     };
     const notificationPromises = subscriptions.map(async (subscription) => {
-      return webpush.sendNotification(subscription, message).catch((err) => {
-        console.error(err);
-      });
+      return webpush
+        .sendNotification(subscription, JSON.stringify(message))
+        .catch((err) => {
+          console.error(err);
+        });
     });
     await Promise.all(notificationPromises);
   });
