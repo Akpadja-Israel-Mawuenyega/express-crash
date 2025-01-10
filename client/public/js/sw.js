@@ -38,9 +38,14 @@ self.addEventListener("activate", async () => {
 });
 
 self.addEventListener("push", async (e) => {
-  self.registration.showNotification("Wohoo!", {
+  const options = {
     body: e.data.text(),
-  });
+    icon: "../assets/logo.jpg",
+  };
+  await self.registration.showNotification(
+    "Reminder from Task Manager!",
+    options
+  );
 });
 
 // Public Key:

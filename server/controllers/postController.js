@@ -1,5 +1,6 @@
 import { taskMessage, subscriptionMessage } from "../models/taskMessage.js";
 import webpush from "web-push";
+import schedule from "node-schedule";
 
 // @desc Get all tasks
 // @route GET api/tasks
@@ -43,10 +44,24 @@ export const createTask = async (req, res) => {
 
   try {
     const newTask = await taskMessage.create(req.body);
+    if (newTask.reminder) {
+      schedule.scheduleJob(newTask.reminder, async () => {
+        const subscriptions = await subscriptionMessage.find();
+        const message = `Reminder: ${newTask.title}`;
+        const notificationPromises = subscriptions.map((subscription) => {
+          return webpush
+            .sendNotification(subscription, message)
+            .catch((err) => {
+              console.error(err);
+            });
+        });
+        await Promise.all(notificationPromises);
+      });
+    }
 
     res.status(201).json(newTask);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -88,20 +103,7 @@ export const deleteTask = async (req, res) => {
 export const createSubscription = async (req, res) => {
   try {
     const newSubscription = await subscriptionMessage.create(req.body);
-    res.status(200).json(newSubscription);
-    console.log(newSubscription);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-// @desc send push notifications
-// @ ROUTE GET /api/send-notifications
-export const sendPushNotification = async (req, res) => {
-  try {
-    webpush.sendNotification(subscriptionMessage[0], "Hello!");
-    res.status(200).json({ message: "Message sent to push service." });
-    res.status(200).json(subscriptionMessage);
+    res.status(201).json(newSubscription);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -6,7 +6,6 @@ import {
   updateTask,
   deleteTask,
   createSubscription,
-  sendPushNotification,
 } from "../controllers/postController.js";
 
 const router = express.Router();
@@ -22,9 +21,6 @@ router.post("/tasks", createTask);
 
 // Create a push suscription
 router.post("/save-subscription", createSubscription);
-
-// send notification
-router.get("/send-notifications", sendPushNotification);
 
 // Update a post
 router.put("/tasks/:id", updateTask);
