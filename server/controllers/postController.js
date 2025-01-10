@@ -37,6 +37,24 @@ export const getTask = async (req, res) => {
   }
 };
 
+// @desc schedule reminder
+const scheduleReminder = async (task) => {
+  const reminderDate = new Date(task.reminder);
+  schedule.scheduleJob(reminderDate, async () => {
+    const subscriptions = await subscriptionMessage.find();
+    const message = {
+      title: "Reminder from Task Manager.",
+      body: `${task.title}is due!`,
+    };
+    const notificationPromises = subscriptions.map(async (subscription) => {
+      return webpush.sendNotification(subscription, message).catch((err) => {
+        console.error(err);
+      });
+    });
+    await Promise.all(notificationPromises);
+  });
+};
+
 // @desc CREATE a task
 // @route POST api/task
 export const createTask = async (req, res) => {
@@ -45,18 +63,7 @@ export const createTask = async (req, res) => {
   try {
     const newTask = await taskMessage.create(req.body);
     if (newTask.reminder) {
-      schedule.scheduleJob(newTask.reminder, async () => {
-        const subscriptions = await subscriptionMessage.find();
-        const message = `Reminder: ${newTask.title}`;
-        const notificationPromises = subscriptions.map((subscription) => {
-          return webpush
-            .sendNotification(subscription, message)
-            .catch((err) => {
-              console.error(err);
-            });
-        });
-        await Promise.all(notificationPromises);
-      });
+      scheduleReminder(newTask);
     }
 
     res.status(201).json(newTask);
