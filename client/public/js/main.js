@@ -81,27 +81,27 @@ async function deleteAllTasks() {
       bell.style.display = "none";
       button.style.display = "none";
       deleteAllButton.style.display = "none";
-    }
+    } else {
+      for (const task of tasks) {
+        const deleteRes = await fetch(
+          `https://express-crash-82yx.onrender.com/api/tasks/${task._id}`,
+          {
+            method: "DELETE",
+          }
+        );
 
-    for (const task of tasks) {
-      const deleteRes = await fetch(
-        `https://express-crash-82yx.onrender.com/api/tasks/${task._id}`,
-        {
-          method: "DELETE",
+        if (!deleteRes.ok) {
+          console.error(`Failed to delete task with id of ${task._id}`);
         }
-      );
-
-      if (!deleteRes.ok) {
-        console.error(`Failed to delete task with id of ${task._id}`);
       }
+      alert("All tasks have been successfully deleted.");
+      output.style.font = "italic 20px arial,helvetica,serif";
+      output.innerHTML = "You have no tasks to show.";
+      nothingHere.style.display = "block";
+      bell.style.display = "none";
+      button.style.display = "none";
+      deleteAllButton.style.display = "none";
     }
-    alert("All tasks have been successfully deleted.");
-    output.style.font = "italic 20px arial,helvetica,serif";
-    output.innerHTML = "You have no tasks to show.";
-    nothingHere.style.display = "block";
-    bell.style.display = "none";
-    button.style.display = "none";
-    deleteAllButton.style.display = "none";
   } catch (error) {
     console.log(error.message);
   }
