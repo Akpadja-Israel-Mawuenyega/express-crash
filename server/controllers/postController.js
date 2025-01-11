@@ -42,10 +42,7 @@ const scheduleReminder = async (task) => {
   const reminderDate = new Date(task.reminder);
   schedule.scheduleJob(reminderDate, async () => {
     const subscriptions = await subscriptionMessage.find();
-    const message = {
-      title: "Reminder from Task Manager.",
-      body: `${task.title}is due!`,
-    };
+    const message = `${task.title}is due!`;
     const notificationPromises = subscriptions.map(async (subscription) => {
       return webpush
         .sendNotification(subscription, JSON.stringify(message))

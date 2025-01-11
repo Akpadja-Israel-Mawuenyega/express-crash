@@ -23,7 +23,7 @@ const saveSubscription = async (subscription) => {
       body: JSON.stringify(subscription),
     }
   );
-  return await res.json(); 
+  return await res.json();
 };
 
 self.addEventListener("activate", async () => {
@@ -38,12 +38,13 @@ self.addEventListener("activate", async () => {
 });
 
 self.addEventListener("push", async (e) => {
+  const data = e.data.text();
   const options = {
-    body: e.data.text(),
+    body: data,
     icon: "../assets/logo.jpg",
   };
   await self.registration.showNotification(
-    "Reminder from Task Manager!",
+    "Reminder from Task Manager.",
     options
   );
 });
