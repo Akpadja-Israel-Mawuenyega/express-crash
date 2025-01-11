@@ -327,6 +327,6 @@ const main = async () => {
   checkPermission();
   await requestNotificationPermission();
   await registerSW();
-  bell.style.display = none;
+  bell.style.display = "none";
   window.alert("You have enabled notifications!");
 };
