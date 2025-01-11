@@ -71,6 +71,16 @@ async function deleteAllTasks() {
 
     const tasks = await res.json();
 
+    if (tasks.length === 0) {
+      alert("There are no tasks to delete.");
+      output.style.font = "italic 20px arial,helvetica,serif";
+      output.innerHTML = "You have no tasks to show.";
+      nothingHere.style.display = "block";
+      bell.style.display = "none";
+      button.style.display = "none";
+      deleteAllButton.style.display = "none";
+    }
+
     for (const task of tasks) {
       const deleteRes = await fetch(
         `https://express-crash-82yx.onrender.com/api/tasks/${task._id}`,
