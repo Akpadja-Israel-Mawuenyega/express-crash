@@ -1,4 +1,5 @@
-import { taskMessage, subscriptionMessage } from "../models/taskMessage.js";
+import { taskMessage } from "../models/taskMessage.js";
+import { subscriptionMessage } from "../models/subscriptionMessage.js";
 import webpush from "web-push";
 import schedule from "node-schedule";
 
