@@ -315,10 +315,21 @@ const registerSW = async () => {
 
 // request Notification permission
 const requestNotificationPermission = async () => {
-  const permission = await Notification.requestPermission();
-
-  if (permission !== "granted") {
-    throw new Error("Notification permission not granted.");
+  if (Notification.permission === "granted") {
+    console.log("Notification permission already granted.");
+    // You can create a notification here if needed
+  } else if (Notification.permission === "denied") {
+    console.log("Notification permission denied.");
+  } else {
+    // Request permission from the user
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        console.log("Notification permission granted.");
+        // You can create a notification here if needed
+      } else {
+        console.log("Notification permission denied.");
+      }
+    });
   }
 };
 
@@ -328,5 +339,4 @@ const main = async () => {
   await requestNotificationPermission();
   await registerSW();
   bell.style.display = "none";
-  window.alert("You have enabled notifications!");
 };
