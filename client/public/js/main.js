@@ -71,6 +71,8 @@ async function deleteAllTasks() {
 
     const tasks = await res.json();
 
+    loading.style.display = "none";
+
     if (tasks.length === 0) {
       alert("There are no tasks to delete.");
       output.style.font = "italic 20px arial,helvetica,serif";
@@ -79,7 +81,6 @@ async function deleteAllTasks() {
       bell.style.display = "none";
       button.style.display = "none";
       deleteAllButton.style.display = "none";
-      loading.style.display = "none";
     }
 
     for (const task of tasks) {
