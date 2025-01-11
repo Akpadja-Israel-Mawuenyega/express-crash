@@ -1,15 +1,18 @@
 import express from "express";
+import dotenv from "dotenv";
 import webpush from "web-push";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import cors from "cors";
 import tasks from "./routes/tasks.js";
 import path from "path";
-const port = 5000;
+const port = process.env.PORT;
 
 // Get the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+dotenv.config();
 
 const app = express();
 
