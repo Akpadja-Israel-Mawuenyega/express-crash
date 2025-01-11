@@ -59,6 +59,7 @@ async function deleteTask(taskId) {
 async function deleteAllTasks() {
   if (!confirm("Are you sure you want to delete all your tasks?")) return;
   output.innerHTML = "";
+  loading.style.display = "block";
   try {
     const res = await fetch(
       `https://express-crash-82yx.onrender.com/api/tasks`
