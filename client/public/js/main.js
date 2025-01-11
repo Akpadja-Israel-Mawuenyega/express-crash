@@ -79,6 +79,7 @@ async function deleteAllTasks() {
       bell.style.display = "none";
       button.style.display = "none";
       deleteAllButton.style.display = "none";
+      loading.style.display = "none";
     }
 
     for (const task of tasks) {
