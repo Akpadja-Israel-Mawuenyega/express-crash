@@ -83,6 +83,8 @@ async function deleteAllTasks() {
       }
     }
     alert("All tasks have been successfully deleted.");
+    output.style.font = "italic 20px arial,helvetica,serif";
+    output.innerHTML = "You have no tasks to show.";
     nothingHere.style.display = "block";
     bell.style.display = "none";
     button.style.display = "none";
